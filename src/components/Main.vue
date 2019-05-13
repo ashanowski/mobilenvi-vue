@@ -77,22 +77,22 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     display: block;
-    filter: blur(8px);
-    -webkit-filter: blur(8px);
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
     transition: all 1000ms;
 }
 
-.showcase:hover::after {
+/* .showcase:hover::after {
     filter: blur(0px);
     -webkit-filter: blur(0px);
 
-}
+} */
 
-.showcase:hover .content {
+/* .showcase:hover .content {
     filter: blur(2px);
     -webkit-filter: blur(2px);
 
-}
+} */
 
 .content {
     position: absolute;
