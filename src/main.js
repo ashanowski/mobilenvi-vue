@@ -4,8 +4,10 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import AOS from 'aos'
+import VeeValidate from 'vee-validate'
 import 'aos/dist/aos.css'
 
+Vue.use(VeeValidate)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
