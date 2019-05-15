@@ -1,47 +1,14 @@
 <template>
   <div id="app">
-    <Showcase v-show="showShowcase"/>
-    <Services v-show="showServices"/>
-    <Main v-show="showMain"/>
-    <Login v-show="showLogin"/>
-    <About v-show="showAbout"/>
-    <Footer v-show="showFooter"/>
     <router-view/>
   </div>
 </template>
 
 <script>
-import About from './components/About'
-import Footer from './components/Footer'
-import Login from './components/Login'
-import Services from './components/Services'
-import Showcase from './components/Showcase'
 
 export default {
-  name: 'App',
-  components: {
-    About,
-    Footer,
-    Login,
-    Services,
-    Showcase
-  },
-  data () {
-    return {
-      showAbout: true,
-      showFooter: true,
-      showLogin: true,
-      showMain: true,
-      showServices: true,
-      showShowcase: true
-    }
-  },
-  methods: {
-    hide () {
-      this.hidden = !this.hidden
-      console.log(30)
-    }
-  }
+  name: 'App'
+
 }
 </script>
 
@@ -50,6 +17,7 @@ body {
   background: rgba(0, 0, 0, 0.9);
   margin: 0;
   color: white;
+  min-height: 100vh;
 }
 
 .container {

@@ -20,7 +20,7 @@ export default {
   content: "";
   height: 100vh;
   width: 100%;
-  background-image: url("../assets/background.jpg");
+  background-image: url("../../assets/background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

@@ -1,22 +1,40 @@
 <template>
-  <div>
-    <section v-show="!showForm" class="login-button bg-dark center">
-      <transition leave-active-class="animated bounceOutLeft">
-        <button @click="showForm = !showForm" data-aos="zoom-in">Login</button>
-      </transition>
-    </section>
-
-    <transition enter-active-class="animated bounceInRight">
-      <section v-show="showForm" class="login-form bg-dark center">
+    <div class="login-page bg-dark">
+      <section class="login-form">
         <form @submit.prevent="logIn">
-          <input type="text" placeholder="Username" v-model="username" name="username" v-validate="`required`">
+
+          <transition appear appear-active-class="animated fadeInRight">
+            <div class="group">
+              <input type="text" placeholder="Username" v-model="username" name="username" v-validate="`min:5`">
+              <span class="highlight"></span>
+              <span class="bar"></span>
+            </div>
+          </transition>
+
+          <transition appear appear-active-class="animated fadeInLeft">
+            <div class="group">
+              <input type="password" placeholder="Password" v-model="password" name="password" v-validate="`min:5`">
+              <span class="highlight"></span>
+              <span class="bar"></span>
+            </div>
+          </transition>
+
+          <transition appear appear-active-class="animated fadeInDown">
+            <button @click="logIn">Log In</button>
+          </transition>
+
+          <router-link to="/"><span class="back">Back</span></router-link>
+
+          <div v-show="shown">
+            Username: {{ this.username }} <br>
+            Password: {{ this.password }} <br>
+            Chuj test 123 :DDD
+          </div>
+
           <span class="alert" v-if="errors.has('skill')">{{ errors.first('skill') }} </span>
-          <input type="password" placeholder="Password" v-model="password" name="password" v-validate="`required`">
-          <button>Log In</button>
         </form>
       </section>
-    </transition>
-  </div>
+    </div>
 </template>
 
 <script>
@@ -24,46 +42,146 @@ export default {
   name: 'Login',
   data () {
     return {
-      showForm: false
-
+      username: '',
+      password: '',
+      shown: false
+    }
+  },
+  methods: {
+    logIn () {
+      console.log(this.username)
+      console.log(this.password)
+      this.shown = true
     }
   }
 }
 </script>
 
 <style>
-.login-button {
-  min-height: 150px;
+
+.login-form form {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
 }
 
-.login-button button {
-  display: inline-block;
-  padding: 20px 60px;
+.group {
+  position: relative;
+  margin-bottom: 45px;
+}
+
+input {
+  font-size: 18px;
+  padding: 10px 10px 10px 5px;
+  border: none;
+  color: #fff;
+  border-bottom: 1px solid #757575;
+  background-color: #333;
+  display: block;
+  width: 300px;
+}
+
+input:focus { outline: none }
+
+label {
+  color: #999;
+  font-size: 18px;
+  font-weight: normal;
   position: absolute;
-  right: 43%;
-  margin-top: 25px;
+  pointer-events: none;
+  left: 5px;
+  top: 10px;
+  transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+}
+
+input:focus ~ label, input:valid ~ label {
+  top: -20px;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.bar:before, .bar:after {
+  content:'';
+  height:2px;
+  width:0;
+  bottom:1px;
+  position:absolute;
+  background:rgb(82, 174, 113);
+  transition:0.2s ease all;
+  -moz-transition:0.2s ease all;
+  -webkit-transition:0.2s ease all;
+}
+.bar:before {
+  left:50%;
+}
+.bar:after {
+  right:50%;
+}
+
+/* active state */
+input:focus ~ .bar:before, input:focus ~ .bar:after {
+  width:50%;
+}
+
+/* HIGHLIGHTER ================================== */
+.highlight {
+  position:absolute;
+  height:80%;
+  width:100px;
+  top:25%;
+  left:0;
+  pointer-events:none;
+  opacity:0.5;
+}
+
+/* active state */
+input:focus ~ .highlight {
+  -webkit-animation:inputHighlighter 0.3s ease;
+  -moz-animation:inputHighlighter 0.3s ease;
+  animation:inputHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes inputHighlighter {
+  from { background:#5264AE; } to { width:0; background:transparent; }
+}
+@-moz-keyframes inputHighlighter { from { background:#5264AE; }to { width:0; background:transparent; }
+}
+@keyframes inputHighlighter {
+from { background:#5264AE; } to { width:0; background:transparent; }
+}
+
+.login-form button {
+  align-self: center;
+  padding: 20px 60px;
   border: 0.16em solid rgba(0, 0, 0, 0.9);
   border-radius: 2em;
   box-sizing: border-box;
   text-decoration: none;
   font-family: "Roboto", sans-serif;
   font-weight: 300;
-  font-size: 35px;
+  font-size: 22px;
   color: black;
   text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
   text-align: center;
   transition: all 0.2s;
 }
 
-.login-form form {
-  width: 50%;
-  margin-left: 560px;
+.login-form .back {
+  padding: 10px;
+  font-size: 20px;
+  text-decoration: none;
+  color: #fff;
+  margin-top: 20px;
+  display: flex;
 }
 
-.login-form input, .login-form button {
-  display: block;
-  margin-bottom: 5px;
-  margin-top: 5px;
-  padding: 10px;
+.login-form .back:hover {
+  color: #aaa;
 }
+
 </style>
