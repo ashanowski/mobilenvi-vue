@@ -1,9 +1,17 @@
 <template>
   <header class="showcase bg-dark">
     <div class="content">
-      <div class="title">Mobilenvi</div>
-      <div class="text">Raspberry Pi Weather Terminals</div>
-      <router-link to="/login"><button class="login-button">Login</button></router-link>
+      <transition appear appear-active-class="animated bounceInRight">
+        <div class="title">Mobilenvi</div>
+      </transition>
+
+      <transition appear appear-active-class="animated bounceInLeft">
+        <div class="text">Raspberry Pi Weather Terminals</div>
+      </transition>
+
+      <transition appear appear-active-class="animated bounceInUp">
+        <router-link to="/login"><button class="login-button">Login</button></router-link>
+      </transition>
     </div>
 
   </header>

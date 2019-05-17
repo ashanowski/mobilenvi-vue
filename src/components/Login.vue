@@ -30,11 +30,12 @@
           </div>
         </transition>
 
-        <transition appear appear-active-class="animated fadeInDown">
+        <transition appear appear-active-class="animated fadeInUp">
           <button @click="login">Log In</button>
         </transition>
-
-        <router-link to="/"><span class="back">Back</span></router-link>
+        <transition appear appear-active-class="animated fadeInDown">
+          <router-link to="/"><span class="back">Back</span></router-link>
+        </transition>
 
       </form>
     </section>
