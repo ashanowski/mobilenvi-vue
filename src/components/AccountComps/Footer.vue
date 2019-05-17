@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-dark center">
+  <footer class="center bg-dark">
     <p>Mobilenvi &copy; 2019</p>
   </footer>
 </template>
@@ -7,6 +7,7 @@
 <script>
 export default {
   name: 'Footer'
+
 }
 </script>
 
@@ -14,9 +15,9 @@ export default {
 footer {
   padding: 1rem;
   position: absolute;
-  left: 0;
   right: 0;
   bottom: 0;
+  left: 0;
 }
 
 footer p {

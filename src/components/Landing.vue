@@ -2,7 +2,6 @@
   <div>
     <Showcase/>
     <Services/>
-    <Main/>
     <About/>
     <Footer/>
   </div>

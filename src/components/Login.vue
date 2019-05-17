@@ -31,7 +31,7 @@
         </transition>
 
         <transition appear appear-active-class="animated fadeInDown">
-          <button v-show="this.$session.get('token')" @click="login">Log In</button>
+          <button @click="login">Log In</button>
         </transition>
 
         <router-link to="/"><span class="back">Back</span></router-link>
@@ -59,9 +59,9 @@ export default {
     login () {
       this.loading = true
       axios.post('http://127.0.0.1:8000/api/token/', this.credentials).then(res => {
-        this.$session.start()
-        this.$session.set('token', res.data.access)
-        router.push('/')
+        localStorage.token = res.data.access
+        localStorage.tokenRefresh = res.data.refresh
+        router.push('/account')
       }).catch(e => {
         this.loading = false
         console.log(e)
@@ -79,6 +79,7 @@ export default {
   height: 100vh;
   justify-content: center;
   align-items: center;
+  width: 100vw;
 }
 
 .group {

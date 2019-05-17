@@ -1,5 +1,5 @@
 <template>
-  <section class="about bg-light" data-aos="fade-right" data-aos-duration="1000">
+  <section class="about bg-light">
     <div class="container">
       <div class="grid-2">
         <div class="center">

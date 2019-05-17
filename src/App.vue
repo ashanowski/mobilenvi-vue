@@ -18,10 +18,11 @@ body {
   margin: 0;
   color: white;
   min-height: 100vh;
+  /* display: flex; */
 }
 
 .container {
-  max-width: 960px;
+  max-width: 100vw;
   margin: auto;
   overflow: hidden;
   padding: 4rem 1rem;

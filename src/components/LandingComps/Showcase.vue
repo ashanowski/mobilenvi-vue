@@ -1,23 +1,15 @@
 <template>
-  <div>
-    <header class="showcase">
-      <div class="content">
-        <div class="title" data-aos="fade-down" data-aos-duration="1000">Mobilenvi</div>
-        <div class="text" data-aos="fade-up" data-aos-duration="1500">Raspberry Pi Weather Terminals</div>
-      </div>
+  <header class="showcase bg-dark">
+    <div class="content">
+      <div class="title">Mobilenvi</div>
+      <div class="text">Raspberry Pi Weather Terminals</div>
+      <router-link to="/login"><button class="login-button">Login</button></router-link>
+    </div>
 
-      <div class="login">
-        <section class="login-button">
-          <router-link to="/login"><button data-aos="zoom-in" data-aos-duration="2s">Login</button></router-link>
-        </section>
-      </div>
-    </header>
-  </div>
+  </header>
 </template>
 
 <script>
-import axios from 'axios'
-import router from '@/router'
 
 export default {
   name: 'Showcase',
@@ -28,29 +20,14 @@ export default {
       loading: false
     }
   },
-  methods: {
-    login () {
-      this.loading = true
-      axios.post('http://127.0.0.1:8000/api/token/', this.credentials).then(res => {
-        console.log(res)
-        console.log(res.data)
-        console.log(res.data.details)
-        this.$session.start()
-        this.$session.set('token', res.data.access)
-        router.push('/')
-      }).catch(e => {
-        this.loading = false
-        console.log(e)
-      })
-    }
-  }
+  methods: {}
 }
 </script>
 
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css?family=Archivo+Narrow|Gugi");
 
-.showcase::after {
+.showcase {
   content: "";
   height: 100vh;
   width: 100%;
@@ -58,24 +35,28 @@ export default {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  display: block;
-  filter: blur(5px);
-  -webkit-filter: blur(5px);
-  transition: all 1000ms;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  // filter: blur(5px);
+  // -webkit-filter: blur(5px);
+  // transition: all 1000ms;
 }
 .content {
-  position: absolute;
-  z-index: 1;
-  top: 25%;
-  left: 30%;
-  width: 555px;
-  height: 350px;
+  // position: absolute;
+  // z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
   transition: all 1000ms;
 }
 
 .content .title {
   font-family: "Gugi", cursive;
   font-size: 120px;
+  text-align: center;
   margin-top: 1rem;
   -webkit-text-stroke: #333 2px;
 }
@@ -86,15 +67,9 @@ export default {
   text-align: center;
 }
 
-.login {
-  min-height: 150px;
-  position: absolute;
-  z-index: 1;
-  margin-top: 60vh;
-  margin-left: 41vw;
-}
-
-.login-button button {
+.content .login-button {
+  margin-top: 50px;
+  justify-self: center;
   border-radius: 2em;
   border: 1px solid black;
   padding: 20px 60px;
@@ -103,7 +78,6 @@ export default {
   font-size: 35px;
   color: black;
   background-color: rgba(115, 245, 115, 0.9);
-  text-align: center;
   transition: all 0.2s;
 }
 
