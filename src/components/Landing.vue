@@ -3,7 +3,6 @@
     <Showcase/>
     <Services/>
     <Main/>
-    <LoginButton/>
     <About/>
     <Footer/>
   </div>
@@ -14,14 +13,12 @@ import About from './LandingComps/About'
 import Footer from './LandingComps/Footer'
 import Services from './LandingComps/Services'
 import Showcase from './LandingComps/Showcase'
-import LoginButton from './LandingComps/LoginButton'
 
 export default {
   name: 'Landing',
   components: {
     About,
     Footer,
-    LoginButton,
     Services,
     Showcase
   },
@@ -29,8 +26,6 @@ export default {
     return {
       showAbout: true,
       showFooter: true,
-      showLogin: true,
-      showMain: true,
       showServices: true,
       showShowcase: true
     }

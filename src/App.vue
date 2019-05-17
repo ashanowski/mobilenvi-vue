@@ -55,26 +55,6 @@ body {
 }
 
 @media (max-width: 560px) {
-  .showcase::after {
-    height: 50vh;
-  }
-  .content {
-    top: 15%;
-    left: 15%;
-    margin-top: 5px;
-    width: 250px;
-  }
-  .content .title {
-    font-size: 60px;
-  }
-  .content .logo {
-    height: 140px;
-    width: 140px;
-  }
-  .content .text {
-    margin-left: 10%;
-    font-size: 20px;
-  }
 
   .login button {
     left: 20%;
@@ -93,6 +73,7 @@ body {
 
 @media (max-height: 500px) {
   .content .text {
+    font-size: 10px;
   }
 
   .content {

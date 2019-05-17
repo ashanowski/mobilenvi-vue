@@ -1,57 +1,71 @@
 <template>
-    <div class="login-page bg-dark">
-      <section class="login-form">
-        <form @submit.prevent="logIn">
+  <div class="login-page bg-dark">
+    <section class="login-form">
+      <form ref="form" @submit.prevent="login">
 
-          <transition appear appear-active-class="animated fadeInRight">
-            <div class="group">
-              <input type="text" placeholder="Username" v-model="username" name="username" v-validate="`min:5`">
-              <span class="highlight"></span>
-              <span class="bar"></span>
-            </div>
-          </transition>
-
-          <transition appear appear-active-class="animated fadeInLeft">
-            <div class="group">
-              <input type="password" placeholder="Password" v-model="password" name="password" v-validate="`min:5`">
-              <span class="highlight"></span>
-              <span class="bar"></span>
-            </div>
-          </transition>
-
-          <transition appear appear-active-class="animated fadeInDown">
-            <button @click="logIn">Log In</button>
-          </transition>
-
-          <router-link to="/"><span class="back">Back</span></router-link>
-
-          <div v-show="shown">
-            Username: {{ this.username }} <br>
-            Password: {{ this.password }} <br>
-            Chuj test 123 :DDD
+        <transition appear appear-active-class="animated fadeInRight">
+          <div class="group">
+            <input type="text"
+                    placeholder="Username"
+                    v-model="credentials.username"
+                    name="username"
+                    maxlength="70"
+                    required>
+            <span class="highlight"></span>
+            <span class="bar"></span>
           </div>
+        </transition>
 
-          <span class="alert" v-if="errors.has('skill')">{{ errors.first('skill') }} </span>
-        </form>
-      </section>
-    </div>
+        <transition appear appear-active-class="animated fadeInLeft">
+          <div class="group">
+            <input type="password"
+                    placeholder="Password"
+                    v-model="credentials.password"
+                    name="password"
+                    :counter="20"
+                    maxlength="20"
+                    required>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+          </div>
+        </transition>
+
+        <transition appear appear-active-class="animated fadeInDown">
+          <button v-show="this.$session.get('token')" @click="login">Log In</button>
+        </transition>
+
+        <router-link to="/"><span class="back">Back</span></router-link>
+
+      </form>
+    </section>
+  </div>
 </template>
 
 <script>
+
+import axios from 'axios'
+import router from '../router'
+
 export default {
   name: 'Login',
   data () {
     return {
-      username: '',
-      password: '',
-      shown: false
+      credentials: {},
+      valid: true,
+      loading: false
     }
   },
   methods: {
-    logIn () {
-      console.log(this.username)
-      console.log(this.password)
-      this.shown = true
+    login () {
+      this.loading = true
+      axios.post('http://127.0.0.1:8000/api/token/', this.credentials).then(res => {
+        this.$session.start()
+        this.$session.set('token', res.data.access)
+        router.push('/')
+      }).catch(e => {
+        this.loading = false
+        console.log(e)
+      })
     }
   }
 }
@@ -169,6 +183,11 @@ from { background:#5264AE; } to { width:0; background:transparent; }
   text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
   text-align: center;
   transition: all 0.2s;
+}
+
+.login-form button:disabled {
+  color: rgba(rgb(187, 2, 2));
+  font-size: 200px;
 }
 
 .login-form .back {
