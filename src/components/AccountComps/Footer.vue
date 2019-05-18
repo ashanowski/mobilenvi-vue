@@ -14,10 +14,6 @@ export default {
 <style>
 footer {
   padding: 1rem;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
 }
 
 footer p {

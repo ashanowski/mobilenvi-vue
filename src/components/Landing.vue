@@ -20,22 +20,7 @@ export default {
     Footer,
     Services,
     Showcase
-  },
-  data () {
-    return {
-      showAbout: true,
-      showFooter: true,
-      showServices: true,
-      showShowcase: true
-    }
-  },
-  methods: {
-    hide () {
-      this.hidden = !this.hidden
-      console.log(30)
-    }
   }
-
 }
 </script>
 

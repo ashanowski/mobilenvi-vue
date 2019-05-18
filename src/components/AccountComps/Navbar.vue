@@ -3,9 +3,9 @@
     <nav>
       <ul>
         <router-link to="/account"><li>Home</li></router-link>
-        <li>Data</li>
-        <li>Terminals</li>
-        <li>Contact</li>
+        <router-link to="/account/data"><li>Weather</li></router-link>
+        <router-link to="/account/terminals"><li>Terminals</li></router-link>
+        <!-- <router-link to="/account/contact"><li>Contact</li></router-link> -->
         <li @click="logOut"><a>Log out</a></li>
       </ul>
     </nav>
@@ -20,6 +20,7 @@ export default {
   methods: {
     logOut () {
       localStorage.removeItem('token')
+      localStorage.removeItem('tokenRefresh')
       router.push('/')
     }
   }
@@ -29,21 +30,17 @@ export default {
 
 <style>
 header {
-  width: 100vw;
   color: black;
   background-color: white;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 80px;
+  height: 60px;
   display: flex;
   align-items: center;
-  justify-items: center;
+  justify-content: center;
   box-shadow: 0 0 25px green;
 }
 
 header * {
-  display: inline;
+  display: flex;
 }
 
 header li {
@@ -53,9 +50,18 @@ header li {
 header a {
   text-decoration: none;
   cursor: pointer;
+  color: black;
+}
+
+header a:visited {
+  text-decoration: none;
 }
 
 header a:hover {
+  color: green;
+}
+
+header a:active {
   color: green;
 }
 

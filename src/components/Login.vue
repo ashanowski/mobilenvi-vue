@@ -185,11 +185,16 @@ from { background:#5264AE; } to { width:0; background:transparent; }
   text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
   text-align: center;
   transition: all 0.2s;
+  background-color: #ddd;
 }
 
 .login-form button:disabled {
-  color: rgba(rgb(187, 2, 2));
+  color: rgb(187, 2, 2);
   font-size: 200px;
+}
+
+.login-form button:hover {
+  background-color: lightgreen;
 }
 
 .login-form .back {

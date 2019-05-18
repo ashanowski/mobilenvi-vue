@@ -1,16 +1,15 @@
 <template>
   <div class="data">
-    <button @click="refreshData" class="refresh-button">Refresh data</button>
-    <div class="data" v-bind:key="termData.id" v-for="termData in terminalData">
+    <button @click="refreshTerminals" class="refresh-button">Refresh data</button>
+    <div class="data" v-bind:key="termInfo.id" v-for="termInfo in terminalInfo">
       <transition appear appear-active-class="animated bounceInRight">
       <div class="dataBox">
-        <i class="temp">{{ termData.temperature }}°C</i>
+        <i class="icon fas fa-network-wired"></i>
         <div class="vl"></div>
         <div class="info">
-          <h3>Terminal: {{ termData.terminal.slice(-2, -1) }}</h3>
-          <p>Pressure: {{ termData.pressure }} hPa</p>
-          <p>Humidity: {{ termData.humidity }}%</p>
-          <p>Date: {{ termData.added_at.slice(0, 10) }} {{ termData.added_at.slice(11, 19) }}</p>
+          <h3>{{ termInfo.name }}</h3>
+          <p>Latitude: {{ termInfo.latitude }}</p>
+          <p>Longitude: {{ termInfo.longitude }}</p>
         </div>
       </div>
       </transition>
@@ -20,55 +19,49 @@
 
 <script>
 
-import router from '@/router/'
 import axios from 'axios'
 
 export default {
-  name: 'Data',
+  name: 'Terminals',
   data () {
     return {
       userAuth: 'Bearer '.concat(localStorage.token),
       refresh: {refresh: localStorage.tokenRefresh},
-      terminalData: {}
+      terminalInfo: {}
     }
   },
   methods: {
-    checkLoggedIn () {
-      console.log('checkLoggedIn')
-      if (!localStorage.token && !localStorage.tokenRefresh) {
-        router.push('/login')
-      }
-    },
-    fetchData () {
-      console.log('fetchData')
+    fetchTerminals () {
+      console.log('fetchTerminals')
       if (!localStorage.token && localStorage.tokenRefresh) this.refreshToken()
-      axios.get('http://127.0.0.1:8000/api/data/', {
+      axios.get('http://127.0.0.1:8000/api/terminals/', {
         headers: {Authorization: this.userAuth}
       }).then(response => {
-        console.log('fetchData: Authorization response:', response)
-        this.terminalData = response.data
+        console.log('fetchTerminals: Authorization response:', response.data)
+        this.terminalInfo = response.data
       }).catch((error) => {
         console.log(error)
       })
     },
-    refreshData () {
-      console.log('refreshData')
-      this.terminalData = {}
-      this.fetchData()
+    refreshTerminals () {
+      console.log('refreshTerminals')
+      this.terminalInfo = {}
+      console.log(this.terminalInfo)
+      this.fetchTerminals()
     },
     refreshToken () {
       console.log('refreshToken')
       axios.post('http://127.0.0.1:8000/api/token/refresh', this.refresh).then(response => {
         localStorage.token = response.data.access
-        console.log('Token refresh response:', response.data.access)
+        console.log(response.data.access)
       }).catch((error) => {
-        console.log('Error:', error)
+        console.log(error)
       })
     }
   },
   mounted () {
     console.log('mounted')
-    this.fetchData()
+    this.fetchTerminals()
   }
 }
 </script>
@@ -126,10 +119,15 @@ export default {
   width: 250px;
   margin-left: -50px;
 }
-.temp {
+.icon {
   align-self: center;
-  font-size: 60px;
-  margin-left: 10px;
+  font-size: 100px;
+}
+
+.vl {
+  border-left: thin dotted green;
+  height: 100%;
+  margin-right: 10px;
 }
 
 .blue {

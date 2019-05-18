@@ -1,7 +1,9 @@
 <template>
   <div>
     <Navbar/>
-    <Data/>
+    <transition appear>
+      <router-view/>
+    </transition>
     <Footer/>
   </div>
 </template>
@@ -22,7 +24,7 @@ export default {
   },
   methods: {
     checkLoggedIn () {
-      if (!localStorage.token) {
+      if (!localStorage.token && !localStorage.tokenRefresh) {
         router.push('/login')
       }
     }
